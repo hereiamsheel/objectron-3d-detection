@@ -1,11 +1,28 @@
 import cv2
 import mediapipe as mp
+import os
 import time
+import datetime
 
 mp_objectron = mp.solutions.objectron
 mp_drawing = mp.solutions.drawing_utils
 
-cap = cv2.VideoCapture('../test-resources/shoe2.mp4')
+# Create output folder
+output_dir = "outputs"
+os.makedirs(output_dir, exist_ok=True)
+
+# Create timestamp filename
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = f"result_{timestamp}.mp4"
+
+# MP4 Video Writer
+fourcc = cv2.VideoWriter_fourcc(*'avc1')
+out = cv2.VideoWriter(os.path.join(output_dir, filename),
+                      fourcc,
+                      20.0,
+                      (640, 480))
+
+cap = cv2.VideoCapture('../test-resources/cup.mp4')
 cv2.namedWindow("Webcam", cv2.WINDOW_NORMAL)
 cv2.resizeWindow("Webcam", 640, 480)
 
@@ -13,7 +30,7 @@ with mp_objectron.Objectron(static_image_mode = False,
                             max_num_objects = 2,
                             min_detection_confidence = 0.4,
                             min_tracking_confidence = 0.4,
-                            model_name = 'Shoe') as objectron:
+                            model_name = 'Cup') as objectron:
     
     while cap.isOpened():
         success, image = cap.read()
@@ -53,6 +70,8 @@ with mp_objectron.Objectron(static_image_mode = False,
                     2)
 
         cv2.imshow("WebCam", image)
+        out.write(image)
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
