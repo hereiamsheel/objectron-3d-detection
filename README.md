@@ -1,4 +1,4 @@
-# 📦 3D Small Object Detection using Objectron
+# 3D Small Object Detection using Objectron
 
 A computer vision project for detecting small objects and estimating their 3D pose using Google's Objectron framework. This system processes real-time video input and generates 3D bounding boxes around detected objects.
 
