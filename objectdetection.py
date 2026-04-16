@@ -5,13 +5,13 @@ import time
 mp_objectron = mp.solutions.objectron
 mp_drawing = mp.solutions.drawing_utils
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('shoe2.mp4')
 
 with mp_objectron.Objectron(static_image_mode = False,
                             max_num_objects = 2,
                             min_detection_confidence = 0.4,
                             min_tracking_confidence = 0.4,
-                            model_name = 'Cup') as objectron:
+                            model_name = 'Shoe') as objectron:
     
     while cap.isOpened():
         success, image = cap.read()
