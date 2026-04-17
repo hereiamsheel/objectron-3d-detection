@@ -57,7 +57,7 @@ source venv/bin/activate     # Linux/Mac
 ```
 
 ```bash
-pip install -r requirements.txt
+pip install opencv-python mediapipe numpy
 ```
 
 ---
